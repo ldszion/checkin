@@ -1,0 +1,166 @@
+p {
+    margin: 0 0 16px;
+}
+a.link {
+    opacity: 0.9;
+    color: inherit;
+    text-decoration: none;
+}
+a.link:hover {
+    opacity: 1;
+}
+
+/**
+ * Hide when Angular is not yet loaded and initialized
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+/* Remove as bordas do menu da sidebar */
+md-sidenav md-list md-list-item .md-button .md-ripple-container {
+    border-radius: 0 !important;
+}
+
+#content, #content md-content {
+    background-color: #f9f9f9;
+}
+
+md-list .active {
+    background-color: rgba(158,158,158,0.2);
+}
+/* Correção de avatar em md-list */
+md-list md-list-item img.md-avatar {
+    margin-top: 16px !important;
+    margin-bottom: 16px;
+}
+
+md-icon.success {
+    color: #259b24;
+}
+
+md-input-container.md-input-invalid .input-icon {
+    color: #F44336;
+}
+
+/* COLORS */
+.grey {
+    background: rgb(66,66,66) !important;
+}
+.text-white {
+    color: #fff;
+}
+
+#content md-content.search {
+    background: rgb(66,66,66);
+}
+#content md-content.search * {
+    color: white;
+}
+#content md-content.search md-input-container.md-input-focused input{
+    border-color: white;
+}
+#content md-content.search md-input-container {
+    padding: 15px 0;
+    font-size: 24px;
+}
+#content md-content.search input {
+    line-height: 40px !important;
+}
+#content md-content.search md-icon {
+    top: 26px;
+}
+
+
+.invisible {
+    visibility: hidden !important;
+}
+
+md-toast {
+    margin-top: 64px;
+}
+md-toast[md-theme=warn] {
+    background-color: #F44336;
+}
+
+.animate-repeat.ng-leave {
+    -webkit-transition: opacity ease 0.5s, height ease 0.5s;
+    -o-transition: opacity ease 0.5s, height ease 0.5s;
+    transition: opacity ease 0.5s, height ease 0.5s;
+}
+
+.animate-repeat.remove.ng-leave.ng-leave-active {
+    background: #EF9A9A;
+}
+.animate-repeat.ng-leave.ng-leave-active {
+    opacity:0;
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+    -webkit-transition: opacity ease 0.5s, height ease 0.5s;
+    -o-transition: opacity ease 0.5s, height ease 0.5s;
+    transition: opacity ease 0.5s, height ease 0.5s;
+}
+
+#loading-bar .bar {
+    background: #F44336;
+    top: 64px;
+}
+/* Fancy blur effect */
+#loading-bar .peg {
+  -moz-box-shadow: #F44336 1px 0 6px 1px;
+  -ms-box-shadow: #F44336 1px 0 6px 1px;
+  -webkit-box-shadow: #F44336 1px 0 6px 1px;
+  box-shadow: #F44336 1px 0 6px 1px;
+}
+
+
+/* PROFILE */
+#profile-page .profile-wallpaper {
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+}
+#profile-page .profile-wallpaper img {
+    border-radius: 10px;
+    width: 110%;
+    position: relative;
+    left: -5%;
+    top: -5%;
+    -webkit-filter: blur(50px);
+    -o-filter: blur(50px);
+    filter: blur(50px);
+}
+#profile-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 8px;
+    height: 350px;
+}
+#fab-buttons {
+    height: 100%;
+}
+#fab-buttons button,
+#fab-buttons a {
+    bottom: -32px;
+    right: 24px;
+}
+#profile-title .title h2 { margin: 5px 0; }
+#profile-title .title p { margin-bottom: 0; }
+#profile-page .profile-image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 100%;
+    /*border: 5px solid white;*/
+    float: right;
+    margin: 0 32px;
+}
+#profile-page .profile-image img{
+    width: 200px;
+    height: 200px;
+}
+#profile-page #profile-content {
+    /*border: 1px solid blue;*/
+}

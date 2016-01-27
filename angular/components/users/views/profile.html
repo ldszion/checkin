@@ -1,0 +1,36 @@
+<md-card id="profile-page" class="animated fadeIn" style="margin: 24px;">
+    <div class="profile-wallpaper">
+        <img src="{{ vm.user.imageUrl }}">
+    </div>
+    <div id="profile-title" layout="row" layout-align="start center" style="padding-left: 32px; margin: 24px 24px 0 24px">
+        <div class="profile-image">
+            <img src="{{ vm.user.imageUrl }}" flex/>
+        </div>
+        <div class="title">
+            <h2 class="md-headline"
+                ng-class="{'text-white': vm.user.imageUrl !== 'img/avatar.png'}">
+                {{ vm.user.firstName }} {{ vm.user.lastName }}
+            </h2>
+            <p class="md-subhead"
+                ng-class="{'text-white': vm.user.imageUrl !== 'img/avatar.png'}"
+                translate="auth.profile.{{ vm.user.profile }}">Usuário</p>
+        </div>
+        <div flex></div>
+        <div id="fab-buttons" layout="row" layout-align="center end">
+            <md-button ui-sref="app.users.edit({id: vm.user.id})" class="md-fab" aria-label="Edit" flex>
+                <md-icon md-svg-icon="image:edit" aria-label="Edit Icon"></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <md-card-content id="profile-content">
+        <md-list>
+            <md-list-item class="md-2-line">
+                <md-icon md-svg-icon="communication:email" aria-label="Alarm Icon"></md-icon>
+                <div class="md-list-item-text">
+                    <h3>{{ vm.user.email }}</h3>
+                    <p>Pessoal</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>

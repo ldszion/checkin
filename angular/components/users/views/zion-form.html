@@ -1,0 +1,179 @@
+<md-content class="md-padding" layout-wrap>
+    <form ng-submit="vm.submit()" name="userform">
+        <md-card>
+            <md-toolbar class="grey">
+                <h1 class="md-toolbar-tools" translate="users.NEW_USER">Novo Usuário</h1>
+            </md-toolbar>
+            <md-card-content>
+                <!-- BASIC -->
+                <h2 class="md-headline primary" translate="users.form.BASIC_INFO">Informações Básicas</h2>
+                <!-- NOME COMPLETO -->
+                <md-input-container>
+                    <label translate="users.FULL_NAME">Nome</label>
+                    <input type="text" name="name" required ng-model="vm.user.name">
+                    <div ng-messages="userform.name.$error" ng-class="{invisible: userform.name.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.FULL_NAME' | translate }}"></span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- EMAIL -->
+                <md-input-container>
+                    <label translate="users.EMAIL">Endereço</label>
+                    <input type="email" name="email" required ng-model="vm.user.email">
+                    <div ng-messages="userform.email.$error" ng-class="{invisible: userform.email.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.EMAIL' | translate }}"></span>
+                        </div>
+                        <div ng-message="email">
+                            <span translate="users.form.INVALID_EMAIL">E-mail inválido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- APELIDO -->
+                <md-input-container>
+                    <label translate="users.NICKNAME">Apelido</label>
+                    <input type="text" name="nickname" required ng-model="vm.user.nickname">
+                    <div ng-messages="userform.nickname.$error" ng-class="{invisible: userform.nickname.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.NICKNAME' | translate }}"></span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- SEXO -->
+                <p class="md-subhead" translate="users.GENDER">Sexo</p>
+                <md-radio-group ng-model="vm.user.gender" class="md-primary">
+                    <md-radio-button ng-repeat="gender in vm.genders" ng-value="gender.value" aria-label="{{ gender.label }}">
+                        <span translate="{{ gender.label }}">Homem</span>
+                    </md-radio-button>
+                    <!-- <md-radio-button value="female" aria-label="gender">
+                        <span translate="users.FEMALE">Mulher</span>
+                    </md-radio-button> -->
+                </md-radio-group>
+                <!-- END BASIC -->
+
+                <!-- PRIVATE -->
+
+                <h2 class="md-headline" translate="users.form.PRIVATE_INFO">Informações Confidenciais</h2>
+                <!-- ENDEREÇO -->
+                <md-input-container>
+                    <label translate="users.BIRTHDAY">Endereço</label>
+                    <input type="date" name="birthday" required ng-model="vm.user.birthday">
+                    <div ng-messages="userform.birthday.$error" ng-class="{invisible: userform.birthday.$untouched}">
+                        <div ng-message="required">
+                            <span translate-value-field="{{ 'users.BIRTHDAY' | translate }}"
+                                translate="users.form.REQUIRED_FIELD">Aniversário obrigatório</span>
+                        </div>
+                        <div ng-message="date">
+                            <span translate-value-field="{{ 'users.BIRTHDAY' | translate }}"
+                                translate="users.form.REQUIRED_FIELD">Aniversário obrigatório</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- CELULAR -->
+                <md-input-container>
+                    <label translate="users.CELL_PHONE">Celular</label>
+                    <input type="text" name="phone" required ng-model="vm.user.phone"
+                        ui-br-phone-number>
+                    <div ng-messages="userform.phone.$error" ng-class="{invisible: userform.phone.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.CELL_PHONE' | translate }}">Telefone obrigatório</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <div layout="row">
+                    <!-- ESTACA -->
+                    <md-input-container flex>
+                        <label translate="users.STAKE">Estaca</label>
+                        <md-select name="stake" md-on-close="vm.loadWards()" ng-model="vm.user.stake" required>
+                            <md-option ng-repeat="stake in vm.stakes" ng-value="stake.id">
+                                {{ stake.name }}
+                            </md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="userform.stake.$error" ng-class="{invisible: userform.stake.$untouched}">
+                            <div ng-message="required">
+                                <span translate="users.form.REQUIRED_FIELD"
+                                    translate-value-field="{{ 'users.STAKE' | translate }}"></span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!-- ALA -->
+                    <md-input-container flex>
+                        <label translate="users.WARD">Ala</label>
+                        <md-select ng-disabled="vm.wards === null" name="ward" ng-model="vm.user.ward" required>
+                            <md-option ng-repeat="ward in vm.wards" ng-value="ward.id">{{ ward.name }}</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="userform.ward.$error" ng-class="{invisible: userform.ward.$untouched}">
+                            <div ng-message="required">
+                                <span translate="users.form.REQUIRED_FIELD"
+                                    translate-value-field="{{ 'users.WARD' | translate }}"></span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <!-- MEMBRO -->
+                <md-checkbox class="md-primary" ng-required="true"
+                    ng-model="vm.user.isMember"
+                    name="isMember"
+                    aria-label="membership">
+                    <span translate="users.IM_MEMBER">Membro?</span>
+                </md-checkbox>
+                <!-- END PRIVATE -->
+
+                <!-- CONTATO DE EMERGÊNCIA -->
+                <h2 class="md-headline" translate="users.form.EMERGENCY_CONTACT_INFO">Contato de Emergência</h2>
+                <p translate="users.form.WE_NEED_EMERGENCY_CONTACT">Precisamos agora das informações de um contato em caso de emergência.</p>
+                <!-- NOME COMPLETO -->
+                <md-input-container>
+                    <label translate="users.emergencyContact.FULL_NAME">Nome</label>
+                    <input type="text" name="emergencyContactName" required ng-model="vm.user.emergencyContact.name">
+                    <div ng-messages="userform.emergencyContactName.$error" ng-class="{invisible: userform.emergencyContactName.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.emergencyContact.FULL_NAME' | translate }}"></span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- TELEFONE DE CONTATO -->
+                <md-input-container>
+                    <label translate="users.emergencyContact.PHONE">Telefone</label>
+                    <input type="text" name="emergencyContactPhone" required ng-model="vm.user.emergencyContact.phone"
+                        ui-br-phone-number>
+                    <div ng-messages="userform.emergencyContactPhone.$error" ng-class="{invisible: userform.emergencyContactPhone.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.emergencyContact.PHONE' | translate }}">Telefone obrigatório</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- PARENTESCO -->
+                <md-input-container>
+                    <label translate="users.emergencyContact.KINSHIP">Parentesco</label>
+                    <input type="text" name="emergencyContactKinship" required ng-model="vm.user.emergencyContact.kinship">
+                    <div ng-messages="userform.emergencyContactKinship.$error" ng-class="{invisible: userform.emergencyContactKinship.$untouched}">
+                        <div ng-message="required">
+                            <span translate="users.form.REQUIRED_FIELD"
+                                translate-value-field="{{ 'users.emergencyContact.KINSHIP' | translate }}"></span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <!-- FIM DO CONTATO DE EMERGÊNCIA -->
+            </md-card-content>
+            <div class="md-actions md-padding" layout="row" layout-align="start center">
+               <md-button class="md-raised md-primary">Salvar</md-button>
+            </div>
+        </md-card>
+    </form>
+</md-content>

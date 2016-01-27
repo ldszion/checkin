@@ -1,0 +1,9 @@
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-4dp"
+    md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" flex>
+    <md-list ng-cloak>
+        <div ng-repeat="section in vm.sections">
+            <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+            <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+        </div>
+    </md-list>
+</md-sidenav>

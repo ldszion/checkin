@@ -1,0 +1,43 @@
+<h3 class="text-white md-display-1 animated fadeInUp">
+    <md-icon md-svg-icon="action:verified_user" style="color: #fff;" aria-label="Alarm Icon"></md-icon>
+    <span translate="auth.LOGIN">Login</span>
+</h3>
+<div class="animated fadeInUp" style="width: 350px">
+    <form>
+        <md-card class="md-whiteframe-12dp" flex>
+            <md-card-content>
+                <md-input-container md-no-float style="padding-bottom: 10px">
+                    <!-- <label translate="auth.login.EMAIL">E-mail</label> -->
+                    <md-icon md-svg-icon="communication:email" aria-label="Alarm Icon"></md-icon>
+                    <input type="email" name="email" ng-model="user.email"
+                        placeholder="{{ 'auth.login.EMAIL' | translate }}">
+                </md-input-container>
+                <md-input-container md-no-float style="padding-bottom: 0px">
+                    <!-- <label translate="auth.login.PASSWORD">Password</label> -->
+                    <md-icon md-svg-icon="action:lock" aria-label="Alarm Icon"></md-icon>
+                    <input type="password" name="password" ng-model="user.password"
+                        placeholder="{{ 'auth.login.PASSWORD' | translate }}">
+                </md-input-container>
+            </md-card-content>
+            <div md-padding class="md-actions" style="padding-right: 14px; padding-bottom: 8px" layout="row" layout-align="end center">
+                <!-- <md-button translate="auth.SIGNUP">Registrar</md-button> -->
+                <md-button ui-sref="app.dashboard" class="md-primary md-raised" translate="auth.SIGNIN">Entrar</md-button>
+            </div>
+            <md-divider></md-divider>
+            <div md-padding class="md-actions" style="padding: 8px 14px" layout="row" layout-align="center center">
+                <!-- <md-button translate="auth.SIGNUP">Registrar</md-button> -->
+                <md-button ng-click="vm.authenticate('facebook')" style="background-color: #335190"
+                    class="md-primary md-raised" flex>
+                    <i class="fa fa-facebook"></i>&nbsp;&nbsp;
+                    <span translate="auth.login.WITH_FACEBOOK"></span>
+                </md-button>
+            </div>
+        </md-card>
+    </form>
+    <br>
+    <div class="text-white" layout="row" layout-align="center center">
+        <a class="text-white" ui-sref="app.auth.register">
+            <b translate="auth.login.DONT_HAVE_ACCOUNT">Don't have an account?</b>
+        </a>
+    </div>
+</div>

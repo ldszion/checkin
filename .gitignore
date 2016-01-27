@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+public/js/
+public/css/
+assets/js/templates.js
+assets/js/translations.js
+.phpintel/
+.idea/

@@ -1,0 +1,77 @@
+<md-list layout="column" style="padding: 0" flex>
+    <md-content class="search" layout-padding>
+        <md-input-container md-no-float class="md-block">
+            <md-icon md-svg-icon="action:search" aria-label="Search Icon"></md-icon>
+            <input type="text" ng-model="search" ng-model="vm.s"
+                placeholder="{{ 'users.SEARCH' | translate }}">
+        </md-input-container>
+    </md-content>
+    <md-subheader><span translate="users.list.TITLE">Título</span></md-subheader>
+    <md-list-item ng-repeat="user in parent.users | filter:search" class="md-2-line animate-repeat remove" style="padding-left: 16px">
+        <img class="md-avatar" ng-src="{{ user.imageUrl }}"/>
+        <div class="md-list-item-text">
+            <h3>
+                <a class="link" ui-sref="app.users.profile({id: user.id})">{{ user.firstName }} {{ user.lastName }}</a>
+            </h3>
+            <p>
+                <span translate="auth.profile.{{ user.profile }}"></span>
+            </p>
+        </div>
+        <span flex></span>
+        <div hide-sm style="margin: 16px 0 0">
+            <md-menu md-position-mode="target-right target">
+                <md-button class="md-icon-button" aria-label="Notifications" ng-click="$mdOpenMenu()">
+                    <md-tooltip md-direction="top"><span translate="users.PROFILE">Perfil</span></md-tooltip>
+                    <md-icon md-svg-icon="action:account_circle"></md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon md-svg-icon="action:done"></md-icon>
+                            Administrador
+                        </md-button>
+                    </md-menu-item> 
+                    <md-menu-item class="md-active active">
+                        <md-button>
+                            <md-icon md-svg-icon=""></md-icon>
+                            Usuário
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+        <div style="margin: 16px 8px 16px 0">
+            <!-- TABLET > -->
+            <div hide-sm>
+                <md-button class="md-icon-button" ng-click="vm.edit(user)" aria-label="Notifications">
+                    <md-tooltip md-direction="top"><span translate="users.EDIT">Editar</span></md-tooltip>
+                    <md-icon md-svg-icon="editor:mode_edit"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="vm.remove($index)" aria-label="Notifications">
+                    <md-tooltip md-direction="top"><span translate="users.DELETE">Remover</span></md-tooltip>
+                    <md-icon md-svg-icon="action:delete"></md-icon>
+                </md-button>
+            </div>
+            <!-- MOBILE -->
+            <md-menu hide-gt-sm md-position-mode="target-right target">
+                <md-button class="md-icon-button" aria-label="Notifications" ng-click="$mdOpenMenu()">
+                    <md-icon md-svg-icon="navigation:more_vert"></md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon md-svg-icon="editor:mode_edit"></md-icon>
+                            <span translate="users.EDIT">Editar</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon md-svg-icon="action:delete"></md-icon>
+                            <span translate="users.DELETE">Remover</span>
+                        </md-button>
+                    </md-menu-item>    
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-list-item>
+</md-list>

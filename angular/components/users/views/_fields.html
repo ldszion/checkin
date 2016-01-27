@@ -1,0 +1,80 @@
+<div layout="row">
+    <!-- PRIMEIRO NOME -->
+    <md-input-container md-no-float style="padding-bottom: 10px" flex>
+        <md-icon class="input-icon" md-svg-icon="social:person" aria-label="Person Icon"></md-icon>
+        <input type="text" name="firstName" required
+            placeholder="{{ 'users.FIRST_NAME' | translate }}"
+            ng-model="vm.user.firstName">
+        <div ng-messages="userform.firstName.$error" ng-class="{invisible: userform.firstName.$untouched}">
+            <div ng-message="required">
+                <span translate="users.form.REQUIRED_FIELD"
+                    translate-value-field="{{ 'users.FIRST_NAME' | translate }}"></span>
+            </div>
+        </div>
+    </md-input-container>
+    <!-- ÚLTIMO NOME -->
+    <md-input-container md-no-float style="padding-bottom: 10px" flex>
+        <input type="text" name="lastName" required
+            placeholder="{{ 'users.LAST_NAME' | translate }}"
+            ng-model="vm.user.lastName">
+        <div ng-messages="userform.lastName.$error" ng-class="{invisible: userform.lastName.$untouched}">
+            <div ng-message="required">
+                <span translate="users.form.REQUIRED_FIELD"
+                    translate-value-field="{{ 'users.LAST_NAME' | translate }}"></span>
+            </div>
+        </div>
+    </md-input-container>
+</div>
+<!-- EMAIL -->
+<md-input-container md-no-float style="padding-bottom: 10px">
+    <md-icon class="input-icon" md-svg-icon="communication:email" aria-label="Person Icon"></md-icon>
+    <input type="email" name="email" required
+        placeholder="{{ 'users.EMAIL' | translate }}"
+        ng-model="vm.user.email">
+    <div ng-messages="userform.email.$error" ng-class="{invisible: userform.email.$untouched}">
+        <div ng-message="required">
+            <span translate="users.form.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.EMAIL' | translate }}"></span>
+        </div>
+        <div ng-message="email">
+            <span translate="users.form.INVALID_EMAIL">E-mail inválido</span>
+        </div>
+    </div>
+</md-input-container>
+<!-- SENHA -->
+<md-input-container md-no-float style="padding-bottom: 0px">
+    <md-icon class="input-icon" md-svg-icon="action:lock" aria-label="Password Icon"></md-icon>
+    <input type="password" name="password"
+        ng-required="!vm.user.id"
+        maxlength="128"
+        minlength="6"
+        placeholder="{{ 'users.PASSWORD' | translate }}"
+        ng-model="vm.user.password">
+    <div ng-messages="userform.password.$error" ng-class="{invisible: userform.password.$untouched}">
+        <div ng-message="required">
+            <span translate="users.form.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.PASSWORD' | translate }}"></span>
+        </div>
+        <div ng-message="minlength">
+            <span translate="users.form.MIN_PASSWORD"></span>
+        </div>
+    </div>
+</md-input-container>
+<!-- CONFIRMACAO DE SENHA -->
+<md-input-container md-no-float style="padding-bottom: 0px">
+    <md-icon class="input-icon" md-svg-icon="action:done_all" aria-label="Password Confirmation Icon"></md-icon>
+    <input type="password" name="passwordConfirmation"
+        ng-required="!vm.user.id"
+        placeholder="{{ 'users.PASSWORD_CONFIRMATION' | translate }}"
+        ng-model="vm.passwordConfirmation"
+        match="vm.user.password">
+    <div ng-messages="userform.passwordConfirmation.$error" ng-class="{invisible: userform.passwordConfirmation.$untouched}">
+        <div ng-message="required">
+            <span translate="users.form.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.PASSWORD_CONFIRMATION' | translate }}"></span>
+        </div>
+        <div ng-message="match">
+            <span translate="users.form.PASSWORD_CONFIRMATION_DIFFERENT"></span>
+        </div>
+    </div>
+</md-input-container>

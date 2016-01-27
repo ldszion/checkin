@@ -1,0 +1,29 @@
+{
+    "auth": {
+        "SIGNIN": "Entrar",
+        "SIGNUP": "Registrar",
+        "AUTHENTICATION": "Autenticação",
+        "LOGIN": "Login",
+        "REGISTER": "Cadastro",
+        "BACK": "Voltar",
+        "RESEND": "Reenviar",
+        "login": {
+            "EMAIL": "E-mail",
+            "PASSWORD": "Senha",
+            "DONT_HAVE_ACCOUNT": "Não tem uma conta?",
+            "WITH_FACEBOOK": "Entrar com Facebook",
+        },
+        "register": {
+            "HAVE_ACCOUNT": "Já tem uma conta?",
+        },
+        "confirmation": {
+            "CONGRATULATIONS": "Parabéns!",
+            "YOU_SIGNED_UP_SUCCESSFULLY": "Seu cadastro foi feito com sucesso.",
+            "WE_SENT_AN_EMAIL": "Enviamos um e-mail para confirmar seu cadastro.",
+        },
+        "profile": {
+            "ADMIN": "Administrador",
+            "USER": "Usuário",
+        }
+    }
+}

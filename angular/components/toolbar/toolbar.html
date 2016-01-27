@@ -1,0 +1,60 @@
+<md-toolbar class="md-raised md-whiteframe-2dp">
+    <div class="md-toolbar-tools md-raised">
+        <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon md-svg-icon="navigation:menu"></md-icon>
+        </md-button>
+        <h1>JAS Brasília</h1>
+        <span flex></span>
+        <md-menu md-position-mode="target-right target">
+            <md-button class="md-icon-button" aria-label="Notifications" ng-click="$mdOpenMenu()">
+                <md-icon md-svg-icon="social:notifications"></md-icon>
+            </md-button>
+            <md-menu-content width="6" style="padding: 0">
+                <md-list style="padding: 0">
+                    <md-subheader class="md-no-sticky">3 line item</md-subheader>
+                    <md-list-item class="md-2-line md-clickable md-with-secondary" md-ink-ripple>
+                        <img ng-src="http://lorempixel.com/100/100/people/1/" class="md-avatar" style="margin-top: 16px" alt="asdf"/>
+                        <div class="md-list-item-text">
+                            <h3>Fulano Silva</h3>
+                            <p>Registrou-se no evento Brasília Tem Talento</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line md-clickable md-with-secondary" md-ink-ripple>
+                        <img ng-src="http://lorempixel.com/100/100/people/6/" class="md-avatar" style="margin-top: 16px" alt="asdf"/>
+                        <div class="md-list-item-text">
+                            <h3>Fulano Silva</h3>
+                            <p>Registrou-se no evento Brasília Tem Talento</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line md-clickable md-with-secondary" md-ink-ripple>
+                        <img ng-src="http://lorempixel.com/100/100/people/7/" class="md-avatar" style="margin-top: 16px" alt="asdf"/>
+                        <div class="md-list-item-text">
+                            <h3>Fulano Silva</h3>
+                            <p>Registrou-se no evento Brasília Tem Talento</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-menu-content>
+        </md-menu>
+        <md-menu md-position-mode="target-right target">
+            <md-button class="md-icon-button" aria-label="Notifications" ng-click="$mdOpenMenu()">
+                <md-icon md-svg-icon="navigation:more_vert"></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button>
+                        <md-icon md-svg-icon="action:account_circle"></md-icon>
+                        Perfil
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                    <md-button>
+                        <md-icon md-svg-icon="action:exit_to_app"></md-icon>
+                        Sair
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>

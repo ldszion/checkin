@@ -1,0 +1,12 @@
+<div>
+    <md-list-item class="md-clickable" md-ink-ripple>
+        <md-icon md-svg-icon="{{ section.icon }}" style="margin: 16px 32px 16px 0"></md-icon>
+        <p translate="{{ section.name }}">Usuários</p>
+        <md-icon md-svg-icon="hardware:keyboard_arrow_down" style="margin: 16px 0 16px 0"></md-icon>
+    </md-list-item>
+    <div class="submenu">
+        <div ng-repeat="submenu in section.submenus">
+            <menu-link section="submenu" ng-if="submenu.type === 'link'"></menu-link>
+        </div>
+    </div>
+</div>

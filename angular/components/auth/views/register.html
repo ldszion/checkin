@@ -1,0 +1,23 @@
+<h3 class="text-white md-display-1 animated fadeInUp">
+    <md-icon md-svg-icon="social:person_add" style="color: #fff;" aria-label="Alarm Icon"></md-icon>
+    <span translate="auth.REGISTER">Cadastro</span>
+</h3>
+<div class="animated fadeInUp" style="width: 500px">
+    <form name="userform">
+        <md-card class="md-whiteframe-12dp" flex>
+            <md-card-content>
+                <!-- USERS FIELDS -->
+                <div ng-include=" 'users/views/_fields.html' "></div>
+            </md-card-content>
+            <div md-padding class="md-actions" style="padding-right: 14px; padding-bottom: 8px" layout="row" layout-align="end center">
+                <md-button ui-sref="app.auth.confirmation" class="md-primary md-raised" translate="auth.SIGNUP">Registrar</md-button>
+             </div>
+        </md-card>
+    </form>
+    <br>
+    <div class="text-white" layout="row" layout-align="center center">
+        <a class="text-white md-subhead" ui-sref="app.auth.login">
+            <b translate="auth.register.HAVE_ACCOUNT">Don't have an account?</b>
+        </a>
+    </div>
+</div>

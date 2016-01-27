@@ -1,0 +1,10 @@
+<div layout="column" flex>
+    <div id="toolbar" ui-view="toolbar"></div>
+    <div layout="row" flex>
+        <div id="sidenav" layout="column" ui-view="sidenav"></div>
+        <div id="content" layout="column" flex>
+            <md-content layout="column" ui-view="content" md-scroll-y flex>
+            </md-content>
+        </div>
+    </div>
+</div>

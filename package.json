@@ -1,0 +1,43 @@
+{
+  "name": "mtfrontend",
+  "version": "1.0.0",
+  "description": "Projeto Vazio para Aplicações Front-end",
+  "main": "index.js",
+  "keywords": [
+    "angularjs"
+  ],
+  "author": "Marco Túlio de Ávila Santos",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-animate": "^1.4.7",
+    "angular-aria": "^1.4.7",
+    "angular-input-masks": "^2.1.1",
+    "angular-loading-bar": "^0.8.0",
+    "angular-material": "0.11.3",
+    "angular-material-icons": "^0.6.0",
+    "angular-messages": "^1.4.7",
+    "angular-mocks": "^1.4.7",
+    "angular-sanitize": "^1.4.8",
+    "angular-translate": "^2.8.1",
+    "angular-ui-router": "^0.2.15",
+    "angular-validation-match": "^1.5.2",
+    "ngstorage": "^0.3.9",
+    "restangular": "^1.5.1",
+    "satellizer": "^0.13.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-angular-translate": "^0.1.4",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^1.12.0",
+    "gulp-notify": "^2",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-uglify": "^1",
+    "gulp-uglifycss": "^1.0.4",
+    "jshint-stylish": "^2",
+    "rimraf": "^2.4.3"
+  }
+}
