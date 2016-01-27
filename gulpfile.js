@@ -7,6 +7,7 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var templateCache = require('gulp-angular-templatecache');
 var translate = require('gulp-angular-translate');
+var sass = require('gulp-sass');
 
 gulp.task('default', ['watch']);
 gulp.task('test', test);
@@ -15,7 +16,8 @@ gulp.task('build', ['jshint', 'build:vendor', 'build:source', 'css:vendor', 'css
 gulp.task('build:vendor', buildVendor);
 gulp.task('build:source', ['templates', 'translate'], buildSource);
 gulp.task('css:vendor', buildCssVendor);
-gulp.task('css:source', buildCssSource);
+gulp.task('css:source', ['sass'], buildCssSource);
+gulp.task('sass', buildSass);
 gulp.task('jshint', jshintFunction);
 gulp.task('watch', ['build'], watchFunction);
 gulp.task('templates', templates);
@@ -61,6 +63,10 @@ var paths = {
         'assets/vendor/**/*.css',
         'assets/css/**/*.css',
     ],
+    sassFiles: [
+        baseDir + '**/*.sass',
+        'assets/sass/**/*.sass',
+    ],
     dist: './public/'
 };
 
@@ -98,6 +104,13 @@ function buildCssSource() {
         .pipe(gulp.dest(paths.dist + 'css/'));
 }
 
+function buildSass() {
+    return gulp.src(paths.sassFiles)
+        .pipe(sass({indentedSyntax: true}).on('error', sass.logError))
+        .pipe(concat('app.css'))
+        .pipe(gulp.dest('assets/css/'));
+}
+
 function clean() {
     return gulp.src([paths.dist + '**/*.js', paths.dist + '**/*.css'], {
             read: false
@@ -133,6 +146,6 @@ function translateFunction() {
 function watchFunction() {
     gulp.watch([
         paths.baseDir + '**/*',
-        paths.sourceCss
+        paths.sassFiles
     ], ['build']);
 }
