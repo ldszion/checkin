@@ -1,12 +1,10 @@
 {
     "users": {
-        "PROFILE": "Perfil",
-        "EDIT": "Editar",
-        "DELETE": "Remover",
-        "SEARCH": "Procurar",
+        "USERS": "Usuários",
+        "SEARCH_USER": "Pesquisar por usuário",
         "NEW_USER": "Novo Usuário",
         "EDIT_USER": "Editar Usuário",
-        "FULL_NAME": "Nome Completo",
+        "NAME": "Nome",
         "FIRST_NAME": "Primeiro Nome",
         "LAST_NAME": "Sobrenome",
         "NICKNAME": "Apelido",
@@ -25,7 +23,7 @@
         "IM_MEMBER": "Sou membro de A Igreja de Jesus Cristo dos Santos dos Últimos Dias",
         "EMERGENCY_CONTACT": "Contato de Emergência",
         "list": {
-            "TITLE": "Usuários",
+            "TITLE": "Lista de Usuários",
             "STAKE": "Estaca",
             "WARD": "Ala",
             "PROFILE": "Perfil",

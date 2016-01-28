@@ -1,5 +1,6 @@
 {
     "dashboard": {
+        "DASHBOARD": "Dashboard",
         "404": {
             "PAGE_NOT_FOUND": "Página não encontrada"
         }

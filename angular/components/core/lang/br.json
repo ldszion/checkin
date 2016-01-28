@@ -1,6 +1,11 @@
 {
     "core": {
-        "EMAIL": "E-mail",
         "CORE": "Core",
+        "EMAIL": "E-mail",
+        "EXAMPLES": "Exemplos",
+        "TO_SEARCH": "Pesquisar",
+        "table": {
+            "ACTIONS": "Ações",
+        }
     }
 }
