@@ -1,0 +1,60 @@
+.md-table
+	$bg-thead: #4C9EF0
+	margin-bottom: 16px
+	max-width: 100%
+	width: 100%
+	border-spacing: 0
+	border-radius: 2px
+	overflow: hidden
+	td, th
+	    padding: 12px 24px
+	    line-height: 40px
+	    text-align: left
+	td
+	    vertical-align: top
+	    &.description *
+		    &:first-child
+		        margin-top: 0
+		    &:last-child
+		        margin-bottom: 0
+	tr
+	    &:nth-child(odd) td
+	      	background-color: #E3ECF5
+	    &:nth-child(even) td
+	      	background-color: transparent
+	th
+	    background-color: $bg-thead
+	    color: white
+	th[st-sort]
+		cursor: pointer
+		&.st-sort-ascent:before
+			content: '\25B2'
+		&.st-sort-descent:before
+			content: '\25BC'
+	tfoot td
+		padding: 12px
+
+.pagination
+	display: inline-block
+	padding-left: 0
+	margin: 10px
+	li
+		$border-radius: 4px
+		display: inline
+		a, span
+			cursor: pointer
+			border: 1px solid #ddd
+			background: white
+			padding: 12px 16px
+			margin-right: -1px
+		&.active
+			cursor: pointer
+			a, span
+				background: #4c9ef0
+				color: white
+		&:first-child > a, &:first-child > span
+			border-top-left-radius: $border-radius
+			border-bottom-left-radius: $border-radius
+		&:last-child > a, &:last-child > span
+			border-top-right-radius: $border-radius
+			border-bottom-right-radius: $border-radius
