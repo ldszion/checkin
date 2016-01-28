@@ -66,14 +66,18 @@ md-toast
     transition: opacity ease 0.5s, height ease 0.5s
 
 #loading-bar
+  $loader-color: #F44336
+  $loader-height: 2px
   .bar
-    background: #F44336
+    background: $loader-color
+    height: $loader-height
     top: 64px
   .peg
-    -moz-box-shadow: #F44336 1px 0 6px 1px
-    -ms-box-shadow: #F44336 1px 0 6px 1px
-    -webkit-box-shadow: #F44336 1px 0 6px 1px
-    box-shadow: #F44336 1px 0 6px 1px
+    height: $loader-height
+    -moz-box-shadow: $loader-color 1px 0 6px 1px
+    -ms-box-shadow: $loader-color 1px 0 6px 1px
+    -webkit-box-shadow: $loader-color 1px 0 6px 1px
+    box-shadow: $loader-color 1px 0 6px 1px
 
 // Fancy blur effect
 
