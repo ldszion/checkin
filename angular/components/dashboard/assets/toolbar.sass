@@ -1,0 +1,15 @@
+#toolbar
+	// @mixings
+	=transition($delay: 200ms, $property: all)
+		transition: $property $delay
+	=dark-background($opacity: 0.1)
+		background: rgba(0,0,0,$opacity)
+	.md-toolbar-tools
+		+dark-background
+	.top-nav-item
+		padding: 22px
+		vertical-align: middle
+		+transition
+		&:hover, &.active
+			+transition
+			+dark-background;

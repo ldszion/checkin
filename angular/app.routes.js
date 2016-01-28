@@ -17,17 +17,13 @@
                 url: '',
                 views: {
                     'index': {
-                        templateUrl: 'dashboard/views/structure.html',
+                        templateUrl: 'dashboard/views/dashboard-1.html',
                         controller: 'AppController',
                         controllerAs: 'app',
                     },
                     'toolbar@app': {
-                        templateUrl: 'toolbar/toolbar.html'
+                        templateUrl: 'dashboard/views/toolbar/toolbar-1.html'
                     },
-                    'sidenav@app': {
-                        templateUrl: 'sidenav/views/sidenav.html',
-                        controller: 'SidenavController as vm'
-                    }
                 }
             })
             .state('app.dashboard', {
