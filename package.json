@@ -19,6 +19,7 @@
     "angular-messages": "^1.4",
     "angular-mocks": "^1.4",
     "angular-sanitize": "^1.4",
+    "angular-smart-table": "^2.1.6",
     "angular-translate": "^2.8",
     "angular-ui-router": "^0.2",
     "angular-validation-match": "^1.5",

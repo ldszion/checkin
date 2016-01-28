@@ -7,5 +7,6 @@
             'ngMessages',
             'validation.match',
             'cfp.loadingBar',
+            'smart-table',
         ]);
 })();
