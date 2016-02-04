@@ -12,13 +12,14 @@
 	 * @param {Object} $http Servico $http do Angular JS
 	 */
 	function API($http) {
-		this.get = get;
-		this.post = post;
+		this.get    = get;
+		this.post   = post;
+		this.delete = destroy;
 
 		var baseUrl = '/api';
 
 		////////////////
-		
+
 		/**
 		 * Realiza o get da url e retorna uma promise
 		 * @param  {string} url Url desejada
@@ -36,6 +37,10 @@
 		 */
 		function post(url, data) {
 			return $http.post(baseUrl + url, data);
+		}
+
+		function destroy(url, data) {
+			return $http.delete(baseUrl + url, data);
 		}
 	}
 })();

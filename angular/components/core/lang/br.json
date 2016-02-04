@@ -6,6 +6,16 @@
         "TO_SEARCH": "Pesquisar",
         "table": {
             "ACTIONS": "Ações",
+        },
+        "error": {
+            "REQUIRED_FIELD": "Campo {{ field }} obrigatório",
+            "MIN_LENGTH": "Este campo deve ter no mínimo {{ min }} caracteres",
+            "MAX_LENGTH": "Este campo deve ter no máximo {{ max }} caracteres",
+            "INVALID_PHONE_NUMBER": "Número de telefone inválido",
+        },
+        "button": {
+            "SAVE": "Salvar",
+            "GO_BACK": "Voltar",
         }
     }
 }
