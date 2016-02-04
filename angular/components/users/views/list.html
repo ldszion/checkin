@@ -1,13 +1,21 @@
 <div style="width: 100%" st-table="vm.displayedUsers" st-safe-src="vm.users">
     <!-- TITULO DE PAGINA -->
     <md-toolbar class="md-tall" layout-align="center center">
-    <div class="container" layout="column" layout-align="center center">
-        <h1 translate="users.list.TITLE"></h1>
-    </div>
+        <div class="container" layout="column" layout-align="center center">
+            <h1 translate="users.list.TITLE"></h1>
+            <div class="page-fab" layout="row" layout-align="end start">
+                <md-button ui-sref="app.usersNew" class="md-fab animated zoomIn" aria-label="Eat cake">
+                    <md-tooltip md-direction="left">
+                        <span translate="users.form.ADD_USER"></span>
+                    </md-tooltip>
+                    <md-icon md-svg-src="content:add"></md-icon>
+                </md-button>
+            </div>
+        </div>
     </md-toolbar>
     <!-- FIM TITULO DE PAGINA -->
     <!-- SEARCH BAR -->
-    <div class="page-search md-whiteframe-1dp animated bounceInDown" layout="row" layout-align="center center">
+    <div class="page-search md-whiteframe-1dp animated fadeInDown" layout="row" layout-align="center center">
         <div class="container" layout="row">
             <md-icon md-svg-icon="action:search" aria-label="Search"></md-icon>
             <input type="search" st-search placeholder="{{ 'users.SEARCH_USER' | translate }}" flex name="search">
@@ -16,12 +24,14 @@
     <br>
     <!-- FIM SEARCH BAR -->
     <div layout="column" layout-align="start center">
-        <div class="container animated fadeIn" layout-align="center center">
+        <div class="container animated fadeInUp" layout-align="center center">
             <table class="md-table">
                 <thead>
                     <tr>
                         <th st-sort="name" translate="users.NAME"></th>
                         <th st-sort="email" translate="users.EMAIL"></th>
+                        <th st-sort="ward.stake.name" translate="users.STAKE"></th>
+                        <th st-sort="ward.name" translate="users.WARD"></th>
                         <th translate="core.table.ACTIONS"></th>
                     </tr>
                 </thead>
@@ -29,11 +39,15 @@
                     <tr ng-repeat="user in vm.displayedUsers | filter: vm.search track by user.id">
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
+                        <td><span ng-if="user.ward">{{ user.ward.stake.name }}</span></td>
+                        <td><span ng-if="user.ward">{{ user.ward.name }}</span></td>
                         <td>
-                            <md-button title="Launch Google.com in new window"
-                                aria-label="Google.com"
-                                class="md-icon-button launch">
-                                <md-icon size="20" md-svg-icon="action:delete"></md-icon>
+                            <md-button ui-sref="app.usersEdit({id: user.id})" aria-label="Edit User"
+                                class="md-icon-button">
+                                <md-icon md-svg-icon="editor:mode_edit"></md-icon>
+                            </md-button>
+                            <md-button ui-sref="app.users.delete({id: user.id})" aria-label="Edit User" class="md-icon-button launch">
+                                <md-icon md-svg-icon="action:delete"></md-icon>
                             </md-button>
                         </td>
                     </tr>

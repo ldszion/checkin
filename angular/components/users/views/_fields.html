@@ -1,39 +1,24 @@
-<div layout="row">
-    <!-- PRIMEIRO NOME -->
-    <md-input-container md-no-float style="padding-bottom: 10px" flex>
-        <md-icon class="input-icon" md-svg-icon="social:person" aria-label="Person Icon"></md-icon>
-        <input type="text" name="firstName" required
-            placeholder="{{ 'users.FIRST_NAME' | translate }}"
-            ng-model="vm.user.firstName">
-        <div ng-messages="userform.firstName.$error" ng-class="{invisible: userform.firstName.$untouched}">
-            <div ng-message="required">
-                <span translate="users.form.REQUIRED_FIELD"
-                    translate-value-field="{{ 'users.FIRST_NAME' | translate }}"></span>
-            </div>
-        </div>
-    </md-input-container>
-    <!-- ÚLTIMO NOME -->
-    <md-input-container md-no-float style="padding-bottom: 10px" flex>
-        <input type="text" name="lastName" required
-            placeholder="{{ 'users.LAST_NAME' | translate }}"
-            ng-model="vm.user.lastName">
-        <div ng-messages="userform.lastName.$error" ng-class="{invisible: userform.lastName.$untouched}">
-            <div ng-message="required">
-                <span translate="users.form.REQUIRED_FIELD"
-                    translate-value-field="{{ 'users.LAST_NAME' | translate }}"></span>
-            </div>
-        </div>
-    </md-input-container>
-</div>
-<!-- EMAIL -->
-<md-input-container md-no-float style="padding-bottom: 10px">
-    <md-icon class="input-icon" md-svg-icon="communication:email" aria-label="Person Icon"></md-icon>
-    <input type="email" name="email" required
-        placeholder="{{ 'users.EMAIL' | translate }}"
-        ng-model="vm.user.email">
-    <div ng-messages="userform.email.$error" ng-class="{invisible: userform.email.$untouched}">
+<md-subheader class="md-accent"><span translate="users.form.ACCOUNT_INFO">Informações da Conta</span></md-subheader>
+<!-- NOME -->
+<md-input-container class="md-icon-float md-block" flex>
+    <label translate="{{ 'users.NAME' | translate }}"></label>
+    <md-icon class="input-icon" md-svg-icon="social:person" aria-label="Person Icon"></md-icon>
+    <input type="text" name="name" required ng-model="vm.user.name">
+    <div ng-show="vm.submitted || (form.name.$touched && form.name.$invalid)" ng-messages="form.name.$error">
         <div ng-message="required">
-            <span translate="users.form.REQUIRED_FIELD"
+            <span translate="core.error.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.NAME' | translate }}"></span>
+        </div>
+    </div>
+</md-input-container>
+<!-- EMAIL -->
+<md-input-container class="md-icon-float md-block">
+    <label translate="{{ 'users.EMAIL' | translate }}"></label>
+    <md-icon class="input-icon" md-svg-icon="communication:email" aria-label="Email Icon"></md-icon>
+    <input type="email" name="email" ng-model="vm.user.email" required>
+    <div ng-show="vm.submitted || (form.email.$touched && form.email.$invalid)" ng-messages="form.email.$error">
+        <div ng-message="required">
+            <span translate="core.error.REQUIRED_FIELD"
                 translate-value-field="{{ 'users.EMAIL' | translate }}"></span>
         </div>
         <div ng-message="email">
@@ -42,35 +27,38 @@
     </div>
 </md-input-container>
 <!-- SENHA -->
-<md-input-container md-no-float style="padding-bottom: 0px">
+<md-input-container class="md-icon-float md-block">
+    <label translate="{{ 'users.PASSWORD' | translate }}"></label>
     <md-icon class="input-icon" md-svg-icon="action:lock" aria-label="Password Icon"></md-icon>
     <input type="password" name="password"
         ng-required="!vm.user.id"
-        maxlength="128"
+        md-maxlength="60"
         minlength="6"
-        placeholder="{{ 'users.PASSWORD' | translate }}"
         ng-model="vm.user.password">
-    <div ng-messages="userform.password.$error" ng-class="{invisible: userform.password.$untouched}">
+    <div ng-show="vm.submitted || (form.password.$touched && form.password.$invalid)" ng-messages="form.password.$error">
         <div ng-message="required">
-            <span translate="users.form.REQUIRED_FIELD"
+            <span translate="core.error.REQUIRED_FIELD"
                 translate-value-field="{{ 'users.PASSWORD' | translate }}"></span>
         </div>
         <div ng-message="minlength">
-            <span translate="users.form.MIN_PASSWORD"></span>
+            <span translate="core.error.MIN_LENGTH" translate-value-min="6"></span>
+        </div>
+        <div ng-message="md-maxlength">
+            <span translate="core.error.MAX_LENGTH" translate-value-max="60"></span>
         </div>
     </div>
 </md-input-container>
 <!-- CONFIRMACAO DE SENHA -->
-<md-input-container md-no-float style="padding-bottom: 0px">
+<md-input-container class="md-icon-float md-block">
+    <label translate="{{ 'users.PASSWORD_CONFIRMATION' | translate }}"></label>
     <md-icon class="input-icon" md-svg-icon="action:done_all" aria-label="Password Confirmation Icon"></md-icon>
     <input type="password" name="passwordConfirmation"
         ng-required="!vm.user.id"
-        placeholder="{{ 'users.PASSWORD_CONFIRMATION' | translate }}"
         ng-model="vm.passwordConfirmation"
         match="vm.user.password">
-    <div ng-messages="userform.passwordConfirmation.$error" ng-class="{invisible: userform.passwordConfirmation.$untouched}">
+    <div ng-show="vm.submitted || (form.passwordConfirmation.$touched && form.passwordConfirmation.$invalid)" ng-messages="form.passwordConfirmation.$error">
         <div ng-message="required">
-            <span translate="users.form.REQUIRED_FIELD"
+            <span translate="core.error.REQUIRED_FIELD"
                 translate-value-field="{{ 'users.PASSWORD_CONFIRMATION' | translate }}"></span>
         </div>
         <div ng-message="match">
@@ -78,3 +66,97 @@
         </div>
     </div>
 </md-input-container>
+<md-subheader class="md-accent"><span translate="users.form.PRIVATE_INFO">Informações privadas</span></md-subheader>
+<!-- CELULAR -->
+<md-input-container class="md-icon-float md-block" flex>
+    <label translate="{{ 'users.PHONE' | translate }}"></label>
+    <md-icon class="input-icon" md-svg-icon="communication:call" aria-label="Phone Icon"></md-icon>
+    <input type="text" name="phone" ng-model="vm.user.phone" required ui-br-phone-number>
+    <div ng-show="vm.submitted || (form.phone.$touched && form.phone.$invalid)" ng-messages="form.phone.$error">
+        <div ng-message="required">
+            <span translate="core.error.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.PHONE' | translate }}"></span>
+        </div>
+        <div ng-message="brPhoneNumber">
+            <span translate="core.error.INVALID_PHONE_NUMBER"></span>
+        </div>
+    </div>
+</md-input-container>
+<!-- ENDEREÇO -->
+<md-input-container class="md-icon-float md-block" flex>
+    <label translate="{{ 'users.ADDRESS' | translate }}"></label>
+    <md-icon class="input-icon" md-svg-icon="communication:location_on" aria-label="Location Icon"></md-icon>
+    <input type="text" name="address" required ng-model="vm.user.address">
+    <div ng-show="vm.submitted || (form.address.$touched && form.address.$invalid)" ng-messages="form.address.$error">
+        <div ng-message="required">
+            <span translate="core.error.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.ADDRESS' | translate }}"></span>
+        </div>
+    </div>
+</md-input-container>
+<!-- SEXO -->
+<p translate="users.GENDER">Sexo:</p>
+<md-radio-group required ng-model="vm.user.gender">
+    <div flex layout="row" layout-align="start center">
+        <md-radio-button value="male" class="md-primary" style="margin: 0 0 24px" flex>
+            <span translate="users.MALE"></span>
+        </md-radio-button>
+        <md-radio-button value="female" style="margin: 0 0 24px" flex>
+            <span translate="users.FEMALE"></span>
+        </md-radio-button>
+        <span flex></span>
+    </div>
+</md-radio-group>
+<!-- ANIVERSÁRIO -->
+<pre>
+    {{ vm.user.birthday | json }}
+</pre>
+<!-- <md-datepicker name="dateField" ng-model="vm.user.birthday"
+    md-placeholder="Enter date"
+    md-min-date="'1999-01-01' | date"></md-datepicker> -->
+<md-input-container class="md-icon-float md-block" flex>
+    <label translate="{{ 'users.BIRTHDAY' | translate }}"></label>
+    <md-icon class="input-icon" md-svg-icon="action:today" aria-label="Date Icon"></md-icon>
+    <input type="date" name="birthday" required ng-model="vm.user.birthday">
+    <div ng-show="vm.submitted || (form.birthday.$touched && form.birthday.$invalid)" ng-messages="form.birthday.$error">
+        <div ng-message="required">
+            <span translate="core.error.REQUIRED_FIELD"
+                translate-value-field="{{ 'users.BIRTHDAY' | translate }}"></span>
+        </div>
+    </div>
+</md-input-container>
+<div layout="row" layout-align="start center">
+    <!-- ESTACAS -->
+    <md-input-container class="md-block" flex>
+        <label translate="users.STAKE">Estaca</label>
+        <md-select ng-model="vm.selectedStake" name="stake" ng-required="vm.user.ward_id == null">
+            <md-option ng-repeat="stake in vm.stakes" ng-value="stake">{{stake.name}}</md-option>
+        </md-select>
+        <div ng-show="vm.submitted || (form.stake.$touched && form.stake.$invalid)"
+            ng-messages="form.stake.$error"
+            class="errors">
+            <div ng-message="required">
+                <span translate="core.error.REQUIRED_FIELD"
+                    translate-value-field="{{ 'users.STAKE' | translate }}"></span>
+            </div>
+        </div>
+    </md-input-container>
+    <!-- WARDS -->
+    <md-input-container class="md-block" flex>
+        <label translate="users.WARD">Ala</label>
+        <md-select ng-model="vm.user.ward_id" name="ward" required>
+            <md-option ng-repeat="ward in vm.selectedStake.wards track by ward.id" ng-value="ward.id">{{ward.name}}</md-option>
+        </md-select>
+        <div ng-show="vm.submitted || (form.ward.$touched && form.ward.$invalid)"
+            ng-messages="form.ward.$error"
+            class="errors">
+            <div ng-message="required">
+                <span translate="core.error.REQUIRED_FIELD"
+                    translate-value-field="{{ 'users.WARD' | translate }}"></span>
+            </div>
+        </div>
+    </md-input-container>
+</div>
+
+<br/>
+
