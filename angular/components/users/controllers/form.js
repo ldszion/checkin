@@ -5,50 +5,53 @@
         .module('app.users')
         .controller('UserFormController', UserFormController);
 
-    UserFormController.$inject = ['$timeout', '$rootScope', '$scope', '$state'];
+    UserFormController.$inject = ['user', '$state', 'UserService', 'StakeService', 'Toaster'];
 
-    function UserFormController($timeout, $rootScope, $scope, $state) {
+    function UserFormController(user, $state, UserService, StakeService, Toaster) {
         var vm = this;
-
-        vm.user = {
-            profile: 'USER',
-            imageUrl: 'img/avatar.png',
-            gender: 'male'
-        };
-        vm.submit = submit;
-        vm.loadWards = loadWards;
-        vm.stakes = [
-            {id: 1, name: 'Brasília'},
-            {id: 2, name: 'Brasília Norte'}
-        ];
-        vm.wards = null;
+        vm.user      = user;
+        vm.save      = save;
+        vm.stakes    = [];
+        vm.submitted = false;
 
         activate();
 
         ///////////////////////////////////////
 
         function activate() {
-            vm.genders = [{
-                label: 'users.MALE',
-                value: 'male',
-            }, {
-                label: 'users.FEMALE',
-                value: 'female',
-            }];
-
+            var stakeId = 0;
+            vm.user.birthday = new Date(vm.user.birthday);
+            if (vm.user.ward !== null && vm.user.ward !== undefined) {
+                stakeId = vm.user.ward.stake_id;
+            }
+            StakeService.all().then(function(stakes) {
+                vm.stakes = stakes;
+                angular.forEach(stakes, function(stake){
+                    if (stake.id === stakeId) {
+                        vm.selectedStake = stake;
+                    }
+                });
+            }, function(error) {
+                Toaster.error(error.data);
+            });
         }
 
-        function submit() {
-            $scope.parent.users.push(vm.user);
-            $state.go('app.users.list');
-        }
-
-        function loadWards() {
-            console.log('selected stake', vm.user.stake);
-            vm.wards = [
-                {id: 2, name: 'Asa Sul'},
-                {id: 1, name: 'Guará I'},
-            ];
+        /**
+         * Salva o usuario do formulario
+         * @param  {Object} form Form
+         * @return {void}
+         */
+        function save(form) {
+            vm.submitted = true;
+            if (form.$invalid) {
+                return;
+            }
+            UserService.save(vm.user).then(function(response) {
+                Toaster.show('User successfully saved');
+                $state.go('app.users');
+            }, function(error) {
+                Toaster.error(error);
+            });
         }
     }
 })();
