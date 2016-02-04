@@ -1,26 +1,40 @@
 .container
-	width: 1160px
+    width: 1360px
 
 #content
-	background-color: #f9f9f9
+    background-color: #f9f9f9
 
 // @mixings
 =transition($delay: 200ms, $property: all)
-	transition: $property $delay
+    transition: $property $delay
+
+
+.animated
+    $animation-duration: .75s
+    -webkit-animation-duration: $animation-duration
+    animation-duration: $animation-duration
+    -webkit-animation-fill-mode: both
+    animation-fill-mode: both
 
 .page-search
-	width: 100%
-	padding: 16px 0
-	background: white
-	z-index: 1
-	input
-		background: transparent
-		border: none
-		outline: none
-		font-size: 20px
-		line-height: 26px
-		margin-left: 16px
-		color: #434343
+    width: 100%
+    padding: 16px 0
+    background: white
+    z-index: 1
+    input
+        background: transparent
+        border: none
+        outline: none
+        font-size: 20px
+        line-height: 26px
+        margin-left: 16px
+        color: #434343
+    &.animated
+        $animation-duration: .5s
+        -webkit-animation-duration: $animation-duration
+        animation-duration: $animation-duration
+        -webkit-animation-fill-mode: both
+        animation-fill-mode: both
 
 .text-center
-	text-align: center !important
+    text-align: center !important
