@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::group(['prefix' => 'api'], function() {
-	Route::get('/users', 'UsersController@index');
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/users', 'UsersController@index');
+    Route::post('/users', 'UsersController@insert');
+    Route::post('/users/{id}', 'UsersController@update');
+    Route::delete('/users/{id}', 'UsersController@destroy');
+    Route::get('/users/{id}', 'UsersController@show');
+
+    Route::get('/stakes', 'StakesController@index');
 });
