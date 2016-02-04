@@ -16,13 +16,34 @@
         $stateProvider
             .state('app.users', {
                 url: '/users',
-                resolve: {
-                    users: getUsers
-                },
                 views: {
                     'content@app': {
                         controller: 'UsersController as vm',
                         templateUrl: 'users/views/list.html',
+                    }
+                },
+            })
+            .state('app.usersNew', {
+                url: '/users/new',
+                resolve: {
+                    user: newUser
+                },
+                views: {
+                    'content@app': {
+                        controller: 'UserFormController as vm',
+                        templateUrl: 'users/views/new.html',
+                    }
+                },
+            })
+            .state('app.usersEdit', {
+                url: '/users/:id/edit',
+                resolve: {
+                    user: getUser
+                },
+                views: {
+                    'content@app': {
+                        controller: 'UserFormController as vm',
+                        templateUrl: 'users/views/edit.html',
                     }
                 },
             });
@@ -40,5 +61,15 @@
      */
     function getUsers(UserService) {
         return UserService.all();
+    }
+
+    newUser.$inject = ['UserService'];
+    function newUser(UserService) {
+        return UserService.$new();
+    }
+
+    getUser.$inject = ['$stateParams', 'UserService'];
+    function getUser(params, UserService) {
+        return UserService.get(params.id);
     }
 })();
