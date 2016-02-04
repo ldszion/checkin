@@ -5,15 +5,25 @@
         .module('app.users')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['UserService', 'users'];
+    UsersController.$inject = ['UserService'];
 
     /* @ngInject */
     /**
      * Controller responsável por recuperar os usuários e ser a controller API para usuários.
      */
-    function UsersController(UserService, users) {
+    function UsersController(UserService) {
         var vm = this;
-        vm.users = users;
+        vm.users          = [];
         vm.displayedUsers = [].concat(vm.users);
+
+        activate();
+
+        //////////////
+
+        function activate() {
+            UserService.all().then(function (users) {
+                vm.users = users;
+            });
+        }
     }
 })();
