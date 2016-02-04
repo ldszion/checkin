@@ -3,7 +3,9 @@
 
     angular
         .module('app.users', [
+            'app.units',
             'ui.router',
+            'ui.utils.masks',
             'ngMessages',
             'validation.match',
             'cfp.loadingBar',
