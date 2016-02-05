@@ -13,6 +13,7 @@
         self.$new   = $new;
         self.get    = get;
         self.save   = save;
+        self.delete = destroy;
         self.users  = [];
 
         ////////////////
@@ -71,6 +72,15 @@
                 self.users.length = 0;
                 return user.data;
             });
+        }
+
+        /**
+         * Implementacao do metodo delete do servico de usuario
+         * @param  {Object} user Referencia do objeto a ser removido
+         * @return {Object}      Promise
+         */
+        function destroy(user) {
+            return API.delete('/users/' + user.id);
         }
     }
 })();
