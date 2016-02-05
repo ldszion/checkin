@@ -43,10 +43,10 @@
                         <td><span ng-if="user.ward">{{ user.ward.name }}</span></td>
                         <td>
                             <md-button ui-sref="app.usersEdit({id: user.id})" aria-label="Edit User"
-                                class="md-icon-button">
+                                class="md-icon-button" style="display: inline-table">
                                 <md-icon md-svg-icon="editor:mode_edit"></md-icon>
                             </md-button>
-                            <md-button ui-sref="app.users.delete({id: user.id})" aria-label="Edit User" class="md-icon-button launch">
+                            <md-button ng-click="vm.remove(user)" aria-label="Edit User" class="md-icon-button launch">
                                 <md-icon md-svg-icon="action:delete"></md-icon>
                             </md-button>
                         </td>
