@@ -1,3 +1,20 @@
+<md-subheader class="md-accent"><span translate="users.form.TAGS">Etiquetas</span></md-subheader>
+<md-chips ng-model="vm.user.tags" md-autocomplete-snap
+    md-transform-chip="vm.transformChip($chip)">
+    <md-autocomplete
+        md-search-text="searchText"
+        md-items="tag in vm.tags | filter:searchText"
+        md-item-text="tag.name"
+        placeholder="{{ 'users.form.ENTER_TAGS' | translate }}">
+        <md-item-template>
+            <span md-highlight-text="searchText">{{tag.name}}</span>
+        </md-item-template>
+    </md-autocomplete>
+    <md-chip-template>
+        {{$chip.name}}
+    </md-chip-template>
+</md-chips>
+<br>
 <md-subheader class="md-accent"><span translate="users.form.ACCOUNT_INFO">Informações da Conta</span></md-subheader>
 <!-- NOME -->
 <md-input-container class="md-icon-float md-block" flex>
