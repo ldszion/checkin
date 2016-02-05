@@ -5,12 +5,13 @@
         .module('app.core.services')
         .service('Toaster', Toaster);
 
-    Toaster.$inject = ['$mdToast'];
+    Toaster.$inject = ['$mdToast', '$filter'];
 
     /* @ngInject */
-    function Toaster($mdToast) {
+    function Toaster($mdToast, $filter) {
         this.show = show;
         this.error = error;
+        var translate = $filter('translate');
 
         var delay = 6000,
             position = 'top right',
@@ -18,26 +19,28 @@
 
         ////////////////
 
-        function show(content) {
-            if (!content){
+        function show(text) {
+            if (!text){
                 return false;
             }
+            text = translate(text);
             return $mdToast.show(
                 $mdToast.simple()
-                    .content(content)
+                    .content(text)
                     .position(position)
                     .action(action)
                     .hideDelay(delay)
             );
         }
 
-        function error(content) {
-            if (!content){
+        function error(text) {
+            if (!text){
                 return false;
             }
+            text = translate(text);
             return $mdToast.show(
                 $mdToast.simple()
-                    .content(content)
+                    .content(text)
                     .position(position)
                     .theme('warn')
                     .action(action)
