@@ -4,6 +4,7 @@
     angular
         .module('app.users', [
             'app.units',
+            'app.tags',
             'ui.router',
             'ui.utils.masks',
             'ngMessages',

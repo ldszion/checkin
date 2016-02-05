@@ -5,22 +5,26 @@
         .module('app.users')
         .controller('UserFormController', UserFormController);
 
-    UserFormController.$inject = ['user', '$state', 'UserService', 'StakeService', 'Toaster'];
+    UserFormController.$inject = ['user', '$state', 'UserService', 'StakeService', 'Toaster', 'TagService'];
 
-    function UserFormController(user, $state, UserService, StakeService, Toaster) {
+    function UserFormController(user, $state, UserService, StakeService, Toaster, TagService) {
         var vm = this;
-        vm.user      = user;
-        vm.save      = save;
-        vm.stakes    = [];
-        vm.submitted = false;
+        vm.user          = user;
+        vm.save          = save;
+        vm.stakes        = [];
+        vm.submitted     = false;
+        vm.tags          = [];
+        vm.transformChip = transformChip;
 
         activate();
 
         ///////////////////////////////////////
 
         function activate() {
-            var stakeId = 0;
+            var stakeId = null;
             vm.user.birthday = new Date(vm.user.birthday);
+
+            // Estacas
             if (vm.user.ward !== null && vm.user.ward !== undefined) {
                 stakeId = vm.user.ward.stake_id;
             }
@@ -33,6 +37,12 @@
                 });
             }, function(error) {
                 Toaster.error(error.data);
+            });
+
+            // Etiquetas
+            TagService.all().then(function(tags) {
+                vm.tags = tags;
+                vm.user.tags = [vm.tags[1]];
             });
         }
 
@@ -52,6 +62,18 @@
             }, function(error) {
                 Toaster.error(error);
             });
+        }
+
+        /**
+         * Transforma um objeto chip adequadamente para as tags
+         * @param  {Object|string} chip Objeto ou string da Etiqueta
+         * @return {Object} tag
+         */
+        function transformChip(chip) {
+            if (angular.isObject(chip)) {
+                return chip;
+            }
+            return { name: chip };
         }
     }
 })();
