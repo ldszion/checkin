@@ -93,6 +93,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($id == 1) {
+            return response('SUPERADMIN_CANNOT_BE_DELETED', 406);
+        }
+        return User::destroy($id);
     }
 }

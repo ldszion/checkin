@@ -174,4 +174,17 @@ class UsersControllerTest extends TestCase
         $expected['ward_id'] = $wardId;
         $this->seeJson($expected);
     }
+
+    /**
+     * @author Marco Túlio de Ávila Santos <marcotulio.avila@gmail.com>
+     */
+    public function testDestroyAUserShouldReturnOk()
+    {
+        // Arrange
+        $user = factory(App\User::class)->create();
+        // Act
+        $this->delete('/api/users/' . $user->id);
+        // Assert
+        $this->assertResponseOk();
+    }
 }
