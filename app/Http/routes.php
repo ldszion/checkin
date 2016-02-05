@@ -25,4 +25,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/users/{id}', 'UsersController@show');
 
     Route::get('/stakes', 'StakesController@index');
+
+    Route::get('/tags', 'TagsController@index');
 });

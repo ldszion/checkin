@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use App\Tag;
 use App\User;
 use App\Ward;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Collection;
 
 class UsersControllerTest extends TestCase
 {
@@ -69,7 +70,7 @@ class UsersControllerTest extends TestCase
     public function testListRouteShouldReturnAllUsersInDatabase()
     {
         // Arrange
-        $users = User::with('ward.stake')->get();
+        $users = User::with('ward.stake', 'tags')->get();
         // Act e Assert
         $this->get('/api/users')->seeJsonEquals($users->toArray());
     }
@@ -80,7 +81,7 @@ class UsersControllerTest extends TestCase
     public function testGetUserRouteShouldReturnAUser()
     {
         // Arrange
-        $user = User::with('ward.stake')->findOrFail(3);
+        $user = User::with('ward.stake', 'tags')->findOrFail(3);
         // Act e Assert
         $this->get('/api/users/3')->seeJsonEquals($user->toArray());
     }
@@ -94,7 +95,7 @@ class UsersControllerTest extends TestCase
         $user = $this->fakeUsersToArray($this->fakeUsers(1));
         // Act
         $this->post('/api/users', $user);
-        $user = User::with('ward.stake')->get()->last();
+        $user = User::with('ward.stake', 'tags')->get()->last();
         // Assert
         $this->seeJson($user->toArray());
         $this->assertResponseOk();
@@ -127,10 +128,10 @@ class UsersControllerTest extends TestCase
         $user['ward_id'] = $wardId;
         // Act
         $this->post("/api/users", $user);
-        $user = User::with('ward.stake')->get()->last();
+        $user = User::all()->last();
         // Assert
         $this->assertResponseOk();
-        $this->seeJson($user->toArray());
+        $this->seeJson(['id' => $user->id, 'ward_id' => $wardId]);
         $user->delete();
     }
 
@@ -170,9 +171,7 @@ class UsersControllerTest extends TestCase
         // Assert
         $this->assertResponseOk();
         $user = User::find($userId);
-        $expected = $user->attributesToArray();
-        $expected['ward_id'] = $wardId;
-        $this->seeJson($expected);
+        $this->seeJson(['ward_id' => $wardId]);
     }
 
     /**
@@ -186,5 +185,32 @@ class UsersControllerTest extends TestCase
         $this->delete('/api/users/' . $user->id);
         // Assert
         $this->assertResponseOk();
+    }
+
+    /**
+     * @author Marco Túlio de Ávila Santos <marcotulio.avila@gmail.com>
+     */
+    public function testInsertUserWithTagsShouldSyncTags()
+    {
+        // Arrange
+        $faker = Faker\Provider\Lorem::word();
+        $tags = [
+            ['id' => rand(1, 10), 'name' => 'tag 1'],
+            ['id' => rand(1, 10), 'name' => 'tag 2'],
+            ['id' => rand(1, 10), 'name' => 'tag 3'],
+            ['id' => rand(1, 10), 'name' => 'tag 4'],
+            ['name' => 'Teste Tag'],
+        ];
+        $user = $this->fakeUsers(1);
+        $user = $this->fakeUsersToArray($user);
+        $user['tags'] = $tags;
+        // Act
+        $this->post('/api/users', $user);
+        // Assert
+        $this->seeInDatabase('users', ['name' => $user['name']]);
+        $this->seeInDatabase('tags', ['name' => 'Teste Tag']);
+        $rows = Tag::where('name', '=', 'Teste Tag')->delete();
+        $this->assertEquals(1, $rows);
+        User::all()->last()->delete();
     }
 }

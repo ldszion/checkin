@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Hash;
 
 class User extends Model implements
     AuthenticatableContract,
@@ -56,11 +57,40 @@ class User extends Model implements
         return $this->belongsTo('App\Ward');
     }
 
+    /**
+     * Ajusta o atributo birthday para um formato aceitavel conforme recebido do Angular JS
+     *
+     * @param  string $date Data vinda de um Input
+     * @author Marco Tulio de Avila Santos <marco.santos@aker.com.br>
+     */
     public function setBirthdayAttribute($date)
     {
         if ($date) {
             $date = Carbon::createFromFormat('Y-m-d\TH:i:s.uO', $date);
             $this->attributes['birthday'] = $date;
         }
+    }
+
+    /**
+     * Faz o hash da senha sem precisar se preocupar com isso no controller
+     *
+     * @param string $password Senha informada pelo usuario
+     * @author Marco Tulio de Avila Santos <marco.santos@aker.com.br>
+     */
+    public function setPasswordAttribute($password)
+    {
+        if ($password) {
+            $this->attributes['password'] = Hash::make($password);
+        }
+    }
+
+    /**
+     * Retorna as tags relacionadas ao usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }

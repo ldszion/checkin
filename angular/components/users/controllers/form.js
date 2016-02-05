@@ -42,7 +42,6 @@
             // Etiquetas
             TagService.all().then(function(tags) {
                 vm.tags = tags;
-                vm.user.tags = [vm.tags[1]];
             });
         }
 

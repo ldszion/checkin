@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\User;
 use App\Http\Controllers\Controller;
-use Hash;
+use App\Http\Requests;
+use App\Tag;
+use App\User;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -18,27 +17,26 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return User::with('ward.stake')->get();
+        return $this->getUsers()->get();
     }
 
     /**
      * Inere um novo usuario
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string                    $id
      * @return \Illuminate\Http\Response
      */
-    public function insert(Request $request, $id = null)
+    public function insert(Request $request)
     {
         try {
             if (!$request->has('password')) {
                 return response('PASSWORD_REQUIRED', 400);
             }
             $user = new User($request->all());
-            $user->password = Hash::make($request->password);
 
             if ($user->save()) {
-                return $user->fresh()->with('ward.stake')->findOrFail($user->id);
+                $this->syncTags($request, $user);
+                return $this->getUsers()->findOrFail($user->id);
             }
             return response('USER_NOT_SAVED', 400);
         } catch (\Exception $e) {
@@ -63,11 +61,9 @@ class UsersController extends Controller
         }
         try {
             $user->fill($request->all());
-            if ($request->has('password')) {
-                $user->password = Hash::make($request->password);
-            }
             if ($user->save()) {
-                return $user->with('ward.stake')->findOrFail($user->id);
+                $this->syncTags($request, $user);
+                return $this->getUsers()->findOrFail($id);
             }
         } catch (\Exception $e) {
             return response($e->getMessage(), 400);
@@ -82,7 +78,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return User::with('ward.stake')->findOrFail($id);
+        return $this->getUsers()->findOrFail($id);
     }
 
     /**
@@ -97,5 +93,36 @@ class UsersController extends Controller
             return response('SUPERADMIN_CANNOT_BE_DELETED', 406);
         }
         return User::destroy($id);
+    }
+
+    /**
+     * Sincroniza as tags recebidas do request
+     *
+     * @param \Illuminate\Http\Request $request Request
+     * @param \App\User                $user    Usuario
+     *
+     * @return void
+     * @author Marco Tulio de Avila Santos <marco.santos@aker.com.br>
+     */
+    private function syncTags(Request $request, User $user)
+    {
+        if ($request->has('tags')) {
+            $tagNames = collect($request->tags)->lists('name');
+            $ids = new \Illuminate\Database\Eloquent\Collection;
+            foreach ($tagNames as $name) {
+                $ids->push(Tag::firstOrCreate(['name' => $name])->id);
+            }
+            $user->tags()->sync($ids->all());
+        }
+    }
+
+    /**
+     * Retorna os usuarios completos com seus relacionamentos
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function getUsers()
+    {
+        return User::with('ward.stake', 'tags');
     }
 }
