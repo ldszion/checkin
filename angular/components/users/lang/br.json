@@ -26,7 +26,10 @@
         },
         "form": {
             "ADD_USER": "Adicionar Usuário",
+            "ADD_TAG": "+Etiqueta",
             "ADD_PHOTO": "Adicionar Foto",
+            "ENTER_TAGS": "Adicione Etiquetas",
+            "TAGS": "Etiquetas",
             "TITLE_NEW": "Novo Usuário",
             "TITLE_EDIT": "Editando Usuário",
             "REQUIRED_FIELD": "Campo {{ field }} obrigatório.",
