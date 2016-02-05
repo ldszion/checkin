@@ -47,7 +47,7 @@
                 return;
             }
             UserService.save(vm.user).then(function(response) {
-                Toaster.show('User successfully saved');
+                Toaster.show('users.form.SUCCESSFULLY_SAVED');
                 $state.go('app.users');
             }, function(error) {
                 Toaster.error(error);
